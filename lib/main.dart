@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Navigation Example',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
@@ -21,7 +22,6 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: null),
       body: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage()));
