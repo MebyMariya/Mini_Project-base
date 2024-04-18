@@ -8,11 +8,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Navigation Example',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
+      debugShowCheckedModeBanner: false, // Add this line to remove the debug option
       home: FirstPage(),
     );
   }
@@ -45,7 +45,7 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: null),
+      //appBar: AppBar(title: null),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -53,23 +53,32 @@ class SecondPage extends StatelessWidget {
             fit: BoxFit.cover, // Fit the image to the screen
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                },
-                child: Text('Login'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => UploadImagePage()));
-                },
-                child: Text('Check'),
-              ),
-            ],
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text('Login'),
+                ),
+                Spacer(), // Add Spacer widget to push the Check button to the bottom
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => UploadImagePage()));
+                    },
+                    child: Text('Check'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -78,18 +87,42 @@ class SecondPage extends StatelessWidget {
 }
 
 class LoginPage extends StatelessWidget {
-  // Add your login page content here
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Login Page')),
-      body: Center(child: Text('Welcome to the Login Page!')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Email'),
+            TextField(
+              decoration: InputDecoration(hintText: 'Enter your email'),
+            ),
+            SizedBox(height: 16),
+            Text('Password'),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(hintText: 'Enter your password'),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle login
+                },
+                child: Text('Login'),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
 class UploadImagePage extends StatelessWidget {
-  // Add your upload image page content here
   @override
   Widget build(BuildContext context) {
     return Scaffold(
